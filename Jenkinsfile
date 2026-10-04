@@ -36,6 +36,11 @@ pipeline {
                 bat 'docker run -d --name student-management -p 8082:8080 student-management:latest'
             }
         }
+        stage('Health Check') {
+            steps {
+                bat 'curl --fail http://localhost:8082/actuator/health'
+            }
+        }
     }
 
     post {
