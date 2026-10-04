@@ -1,16 +1,29 @@
 ---
-- name: Deploy Student Management application
-  hosts: appserver
+- name: Deploy Student Management Application
+  hosts: local
+  connection: local
+  become: false
+
   tasks:
-    - name: Stop old container
+
+    - name: Stop existing container
       community.docker.docker_container:
         name: student-management
         state: absent
-    - name: Start application
+
+    - name: Build Docker image
+      community.docker.docker_image:
+        name: student-management
+        tag: latest
+        source: build
+        build:
+          path: /mnt/d/student-management-devops
+
+    - name: Start Student Management container
       community.docker.docker_container:
         name: student-management
         image: student-management:latest
         state: started
         restart_policy: unless-stopped
-        published_ports:
-          - "8080:8080"
+        ports:
+          - "8082:8080"
