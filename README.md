@@ -1,6 +1,49 @@
 # Student Management System - DevOps Mini Project
 
-Developer -> GitHub -> Jenkins -> Build & Test -> Docker Image -> Deployment -> Monitoring
+System Architecture
+
+                         ┌───────────────┐
+                         │   Developer   │
+                         └───────┬───────┘
+                                 │
+                              git push
+                                 │
+                                 ▼
+                         ┌───────────────┐
+                         │    GitHub     │
+                         └───────┬───────┘
+                                 │
+                                 ▼
+                         ┌───────────────┐
+                         │    Jenkins    │
+                         │      CI       │
+                         └───────┬───────┘
+                                 │
+                  ┌──────────────┼──────────────┐
+                  ▼              ▼              ▼
+                Maven          JUnit          Docker
+                Build          Tests           Build
+                  │              │              │
+                  └──────────────┬-------───────┘
+                                 ▼
+                            Docker Image
+                                 │
+                                 ▼
+                              Ansible
+                                 │
+                                 ▼
+                            Cloud Server
+                                 │
+                                 ▼
+                          Spring Boot API
+                                 ▲
+                                 │
+                                 │ REST API
+                                 │
+                       ┌─────────┴─────────┐
+                       │      Vercel       │
+                       │  React Frontend   │
+                       └───────────────────┘
 
 ## Stack
 Java 17, Spring Boot, Maven, H2, JUnit, Git/GitHub, Jenkins, Docker, Docker Compose, Ansible, Actuator.
