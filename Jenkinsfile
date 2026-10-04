@@ -2,8 +2,11 @@ pipeline {
 
     agent any
 
-    stages {
+    tools {
+        maven 'maven3'
+    }
 
+    stages {
         stage('Checkout') {
             steps {
                 checkout scm
