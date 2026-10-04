@@ -1,0 +1,16 @@
+---
+- name: Deploy Student Management application
+  hosts: appserver
+  tasks:
+    - name: Stop old container
+      community.docker.docker_container:
+        name: student-management
+        state: absent
+    - name: Start application
+      community.docker.docker_container:
+        name: student-management
+        image: student-management:latest
+        state: started
+        restart_policy: unless-stopped
+        published_ports:
+          - "8080:8080"
