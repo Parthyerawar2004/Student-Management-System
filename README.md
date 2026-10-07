@@ -2,51 +2,50 @@
 
 System Architecture
 
-                         ┌───────────────┐
-                         │   Developer   │
-                         └───────┬───────┘
-                                 │
-                              git push
-                                 │
-                                 ▼
-                         ┌───────────────┐
-                         │    GitHub     │
-                         └───────┬───────┘
-                                 │
-                                 ▼
-                         ┌───────────────┐
-                         │    Jenkins    │
-                         │      CI       │
-                         └───────┬───────┘
-                                 │
-                  ┌──────────────┼──────────────┐
-                  ▼              ▼              ▼
-                Maven          JUnit          Docker
-                Build          Tests           Build
-                  │              │              │
-                  └──────────────┬-------───────┘
-                                 ▼
-                            Docker Image
-                                 │
-                                 ▼
-                              Ansible
-                                 │
-                                 ▼
-                            Cloud Server
-                                 │
-                                 ▼
-                          Spring Boot API
-                                 ▲
-                                 │
-                                 │ REST API
-                                 │
-                       ┌─────────┴─────────┐
-                       │      Vercel       │
-                       │  React Frontend   │
-                       └───────────────────┘
+                         ┌──────────────┐
+                         │   Developer  │
+                         └──────┬───────┘
+                                │ git push
+                                ▼
+                         ┌──────────────┐
+                         │    GitHub    │
+                         └──────┬───────┘
+                                │
+                                ▼
+                         ┌──────────────┐
+                         │   Jenkins    │
+                         │     CI/CD    │
+                         └──────┬───────┘
+                                │
+                    ┌───────────┼───────────┐
+                    ▼           ▼           ▼
+                  Maven       JUnit       Docker
+                  Build       Tests        Build
+                    │           │           │
+                    └───────────┼───────────┘
+                                ▼
+                         ┌──────────────┐
+                         │    Ansible   │
+                         └──────┬───────┘
+                                │
+                         Local Docker
+                                │
+                 ┌──────────────┴──────────────┐
+                 │                             │
+             Development                    Cloud
+                 │                             │
+                 ▼                             ▼
+          localhost:8082                     Render
+                                               │
+                                         Spring Boot API
+                                               │
+                                               │ HTTPS
+                                               ▼
+                                            Vercel
+                                         React Frontend
 
 ## Stack
-Java 17, Spring Boot, Maven, H2, JUnit, Git/GitHub, Jenkins, Docker, Docker Compose, Ansible, Actuator.
+Java 17, React.js, Spring Boot, Maven, H2, JUnit, Git/GitHub, Jenkins, Docker, Docker Compose, Ansible, Actuator.
 
 ## Local run
 mvn clean test
