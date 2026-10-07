@@ -12,7 +12,17 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build Frontend') {
+            steps {
+                dir('frontend') {
+                    bat 'npm ci'
+                    bat 'npm run build'
+                }
+                bat 'xcopy frontend\\dist\\* src\\main\\resources\\static\\ /s /e /y /i'
+            }
+        }
+
+        stage('Build Backend') {
             steps {
                 bat 'mvn clean package -DskipTests -U'
             }
@@ -44,6 +54,7 @@ pipeline {
                 bat 'docker run -d --name student-management -p 8082:8080 student-management:latest'
             }
         }
+
         stage('Health Check') {
             steps {
                 sleep(time: 20, unit: 'SECONDS')
