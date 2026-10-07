@@ -46,6 +46,7 @@ pipeline {
         }
         stage('Health Check') {
             steps {
+                sleep(time: 20, unit: 'SECONDS')
                 bat 'curl --fail http://localhost:8082/actuator/health'
             }
         }
