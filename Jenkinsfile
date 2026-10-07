@@ -32,7 +32,15 @@ pipeline {
 
         stage('Docker Deploy') {
             steps {
-                bat 'docker rm -f student-management || echo No existing container found'
+                script {
+                    def status = bat(
+                        script: 'docker rm -f student-management',
+                        returnStatus: true
+                    )
+                    if (status != 0) {
+                        echo 'No existing student-management container found.'
+                    }
+                }
                 bat 'docker run -d --name student-management -p 8082:8080 student-management:latest'
             }
         }
