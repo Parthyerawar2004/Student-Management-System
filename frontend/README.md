@@ -1,5 +1,7 @@
 # Student Management Platform — React Frontend
 
+It is a very Basic Student Management System to understand practical working and structure of the DevOps tools such as GitHub, Ansible, Docker, and Jenkis.
+
 Modern React + Vite frontend for the Spring Boot Student Management API.
 
 Expected endpoints:
